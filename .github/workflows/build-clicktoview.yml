@@ -1,5 +1,4 @@
 name: Build Clicktoview APK
-
 on:
   push:
     branches:
@@ -8,35 +7,22 @@ on:
 
 jobs:
   build:
-    name: Build APK
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up Java
-        uses: actions/setup-java@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
-
-      - name: Make gradlew executable
-        run: chmod +x template/myapp/gradlew
-
-      - name: Build Debug APK
-        run: template/myapp/gradlew assembleDebug
-
-      - name: Prepare APK ZIP
-        run: |
+      - run: chmod +x template/myapp/gradlew
+      - run: template/myapp/gradlew :app:assembleDebug
+      - run: |
           mkdir -p deploy
           cp template/myapp/app/build/outputs/apk/debug/app-debug.apk deploy/Clicktoview.apk
           cd deploy
           zip -r Clicktoview.zip Clicktoview.apk
-          cd ..
-
-      - name: Upload APK ZIP
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: Clicktoview
           path: deploy/Clicktoview.zip
