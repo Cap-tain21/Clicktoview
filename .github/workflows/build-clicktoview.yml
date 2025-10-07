@@ -8,10 +8,11 @@ on:
 
 jobs:
   build:
+    name: Build APK
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Java
@@ -26,7 +27,7 @@ jobs:
       - name: Build Debug APK
         run: template/myapp/gradlew assembleDebug
 
-      - name: Prepare APK
+      - name: Prepare APK ZIP
         run: |
           mkdir -p deploy
           cp template/myapp/app/build/outputs/apk/debug/app-debug.apk deploy/Clicktoview.apk
@@ -35,7 +36,7 @@ jobs:
           cd ..
 
       - name: Upload APK ZIP
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Clicktoview
           path: deploy/Clicktoview.zip
