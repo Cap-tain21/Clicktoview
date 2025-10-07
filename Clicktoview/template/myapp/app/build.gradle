@@ -1,0 +1,30 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.myapp.clicktoview"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+        signingConfig signingConfigs.debug
+    }
+
+    buildTypes {
+        debug {}
+        release {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+
+    namespace "com.myapp.clicktoview"
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:1.6.1"
+}

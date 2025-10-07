@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# Minimal gradlew stub for Termux
+echo "This is a placeholder gradlew file. Use GitHub Actions to build."
